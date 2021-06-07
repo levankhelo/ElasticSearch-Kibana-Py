@@ -4,13 +4,16 @@ import csv
 es = Elasticsearch()
 
 with open('./data/2010_Census_Populations_by_Zip_Code.csv') as f:
+
   index_name = 'census_data_records'
   doctype = 'census_record'
   reader = csv.reader(f)
   headers = []
   index = 0
+
   es.indices.delete(index=index_name, ignore=[400, 404])
   es.indices.create(index=index_name, ignore=400)
+
   es.indices.put_mapping(
       index=index_name,
       doc_type=doctype,
