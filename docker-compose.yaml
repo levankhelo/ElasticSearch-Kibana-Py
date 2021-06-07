@@ -1,0 +1,36 @@
+version: '3.2'
+
+services:
+    kibana:
+        image: kibana:7.13.1
+        depends_on: 
+            - es
+        container_name: kibana
+        restart: always
+        ports:
+            - '5601:5601'
+        networks: 
+            inet:
+
+
+    es:
+        image: elasticsearch:7.13.1
+        container_name: elasticsearch
+        restart: always
+        environment: 
+            - discovery.type=single-node
+        volumes: 
+            - ./data:/data
+        ports:
+            - '9200:9200'
+            - '9300:9300'
+        networks: 
+            inet:
+
+    
+networks:
+    inet:
+        ipam:
+            driver: default
+            config:
+                - subnet: 172.16.100.0/24
