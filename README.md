@@ -1,42 +1,31 @@
 # ElasticSearch-Kibana-Py
 Simple ElasticSearch + Kibana visualization project using Python3
 
-## prerequisited
+## Prerequisited
 
 - Docker
-- ElasticSearch 
 - Python3 Pip and Virtual Environment
   - to install `requirements.txt`
 
 ## Run application
 
-Terminal Tab 1: Execute ElasticSearch
+**Terminal** *Tab 1*: Start services
 ```bash
-elasticsearch
+docker compose up --build
 ```
-Terminal Tab 2: Execute Kibana and bind it to elasticsearch
-```bash
-kibana -e http://127.0.0.1:9200
-```
+
  
-Terminal Tab 3: Execute Application
+**Terminal** *Tab 2*: Execute Application
+Install dependencies
+```bash
+python3 -m venv .env
+source .env/bin/activate
+python3 -m pip install -r requrements.txt
+```
+Execute application
 ```bash
 python3 main.py
 ```
+## On Kibana display
+Open up kibana using `localhost:5601`
 
-Source virtual environmetn where you installed `requirements.txt`
-```bash
-source dev.env/bin/activate
-```
-
-Start application (Method 1)
-```bash
-bash start.sh
-```
-
-Start application (Method 2)
-```bash
-docker run -d --name kibana -p 5601:5601 kibana:7.12.1
-
-python3 main.py
-```
